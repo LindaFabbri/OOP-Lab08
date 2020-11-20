@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class MiniGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        canvas.add(write);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -47,7 +48,13 @@ public class MiniGUI {
                 System.out.println(rng.nextInt());
             }
         });
-    }
+        
+        final JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.X_AXIS));
+        myPanel.add(write, -1);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
 
     private void display() {
         /*
@@ -62,6 +69,7 @@ public class MiniGUI {
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
+        frame.pack();
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
